@@ -1,5 +1,7 @@
 
+import 'package:amazon_flutter_tutorial/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../constants/global_variables.dart';
 import '../../features/account/screens/account_screen.dart';
 import '../../features/cart/screens/cart_screen.dart';
@@ -32,7 +34,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    // final userCartLen = context.watch<UseuserrProvider>()..cart.length;
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
 
     return Scaffold(
       body: pages[_page],
@@ -98,11 +100,11 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              child: const Stack(
+              child: Stack(
                 alignment: Alignment.center, // Centers the text on the icon.
                 children: [
                   Badge(
-                    label: Text("2"),
+                    label: Text("$userCartLen"),
                     child: Icon(
                     Icons.shopping_cart_outlined,
                      ),
