@@ -51,7 +51,11 @@ class ProductDetailsServices {
             cart: jsonDecode(response.body)["cart"]
           );
 
+
+
          userProvider.setUserFromModel(user);
+         // Optionally show a success message
+         showSnackBar(context, "Product added to cart!");
         },
       );
     } catch (e) {
@@ -60,8 +64,6 @@ class ProductDetailsServices {
       showSnackBar(context, e.toString());
     }
   }
-
-
 
   void rateProduct({
     required BuildContext context,
