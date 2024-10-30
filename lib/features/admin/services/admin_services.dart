@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
+import '../../../models/order.dart';
 import '../../../models/product_dart.dart';
+import '../model/sales.dart';
 
 class AdminServices {
   void sellProduct({
@@ -125,4 +127,117 @@ class AdminServices {
       print(e);
     }
   }
+
+
+  Future<List<Order>> fetchAllOrders(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Order> orderList = [];
+    try {
+      http.Response res =
+      await http.get(Uri.parse('$uri/api/admin/get-orders'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            orderList.add(
+              Order.fromJson(
+                jsonEncode(
+                  jsonDecode(res.body)[i],
+                ),
+              ),
+            );
+          }
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return orderList;
+  }
+
+
+  void changeOrderStatus({
+    required BuildContext context,
+    required int status,
+    required Order order,
+    required VoidCallback onSuccess,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    // Construct the request URL
+    final String requestUrl = '$uri/api/admin/change-order-status';
+
+    // Construct the request body
+    final String requestBody = jsonEncode({
+      'id': order.id,
+      'status': status,
+    });
+
+    // Print the request URL and body
+    print('Request URL: $requestUrl');
+    print('Request Body: $requestBody');
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse(requestUrl),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: requestBody,
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: onSuccess,
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
+
+  Future<Map<String, dynamic>> getEarnings(BuildContext context) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    List<Sales> sales = [];
+    double totalEarning = 0.0;
+    try {
+      http.Response res =
+      await http.get(Uri.parse('$uri/api/admin/analytics'), headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': userProvider.user.token,
+      });
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          var response = jsonDecode(res.body);
+          totalEarning = response['totalEarnings'];
+          sales = [
+            Sales('Mobiles', response['mobileEarnings']),
+            Sales('Essentials', response['essentialEarnings']),
+            Sales('Books', response['booksEarnings']),
+            Sales('Appliances', response['applianceEarnings']),
+            Sales('Fashion', response['fashionEarnings']),
+          ];
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return {
+      'sales': sales,
+      'totalEarnings': totalEarning,
+    };
+  }
+
+
 }
