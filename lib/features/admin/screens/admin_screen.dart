@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
+import '../../account/services/account_services.dart';
 import 'analtyics_screen.dart';
 import 'orders_screen.dart';
 
@@ -60,12 +61,18 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
-              )
+              ),
             ],
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.logout, color: Colors.black),
+              onPressed: () {
+                AccountServices().logOut(context);
+              },
+            ),
+          ],
         ),
-
-
       ),
 
        body: pages[_page],
