@@ -11,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import '../../../providers/user_provider.dart';
+import '../../admin/screens/admin_screen.dart';
 
 class AuthService {
   // Sign up method to register a user
@@ -75,7 +76,13 @@ class AuthService {
            SharedPreferences prefs = await SharedPreferences.getInstance();
            Provider.of<UserProvider>(context, listen: false).setUser(response.body);
            await prefs.setString("x-auth-token", jsonDecode(response.body)["token"]);
-           Navigator.pushNamed(context, BottomBar.routeName);
+
+           if(jsonDecode(response.body)["type"] == "user"){
+             Navigator.pushNamed(context, BottomBar.routeName);
+           }
+           else{
+             Navigator.pushNamed(context, AdminScreen.routeName);
+           }
 
         },
       );

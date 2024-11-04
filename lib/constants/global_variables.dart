@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-String uri = "http://10.73.23.93:3000";
+// String uri = "http://10.73.23.93:3000";
 // String uri = "http://192.168.0.9:3000";
 
 // library wifi ip address
 // String uri = "http://192.168.0.145:3000";
+
+ // host url
+ String uri ="https://amazonapi-production-19ed.up.railway.app";
 
 
 class GlobalVariables {

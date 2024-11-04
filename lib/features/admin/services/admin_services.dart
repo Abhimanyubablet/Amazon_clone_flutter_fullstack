@@ -232,6 +232,7 @@ class AdminServices {
       );
     } catch (e) {
       showSnackBar(context, e.toString());
+      print(e);
     }
     return {
       'sales': sales,

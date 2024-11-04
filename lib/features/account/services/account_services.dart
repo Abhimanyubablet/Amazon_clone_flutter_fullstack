@@ -49,16 +49,22 @@ class AccountServices{
 
   void logOut(BuildContext context) async {
     try {
-      SharedPreferences sharedPreferences =
-      await SharedPreferences.getInstance();
-      await sharedPreferences.setString('x-auth-token', '');
+      // Access SharedPreferences instance
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+      // Clear the stored authentication token
+      await sharedPreferences.remove('x-auth-token');
+
+      // Navigate to AuthScreen and remove all previous routes
       Navigator.pushNamedAndRemoveUntil(
         context,
         AuthScreen.routeName,
             (route) => false,
       );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      // Display error message in case of failure
+      showSnackBar(context, 'Failed to log out. Please try again.');
     }
   }
+
 }
