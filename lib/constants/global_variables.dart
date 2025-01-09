@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 // String uri = "http://192.168.0.145:3000";
 
  // host url
- String uri ="https://amazonapi-production-19ed.up.railway.app";
+ String uri ="https://amazonapi-production-b4b6.up.railway.app";
 
 
 class GlobalVariables {

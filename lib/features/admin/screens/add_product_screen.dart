@@ -205,7 +205,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                     hintText: 'Quantity',
                   ),
                   const SizedBox(height: 10),
-
                   SizedBox(
                     width: double.infinity,
                     child: DropdownButton(
@@ -224,7 +223,6 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       },
                     ),
                   ),
-
                   const SizedBox(height: 10),
                   CustomButton(
                     text: 'Sell',

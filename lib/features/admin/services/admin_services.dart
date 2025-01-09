@@ -87,8 +87,7 @@ class AdminServices {
           context: context,
           onSuccess: () {
             for (int i = 0; i <= jsonDecode(response.body).length - 1; i++) {
-              productList.add(
-                  Product.fromJson(jsonEncode(jsonDecode(response.body)[i])));
+              productList.add(Product.fromJson(jsonEncode(jsonDecode(response.body)[i])));
             }
           });
     } catch (e) {

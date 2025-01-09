@@ -34,7 +34,6 @@ class TopCategories extends StatelessWidget {
                       ),
                     ),
                   ),
-              
                   Text(
                     GlobalVariables.categoryImages[index]['title']!,
                     style: const TextStyle(
@@ -42,7 +41,6 @@ class TopCategories extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-
                 ],
               ),
             );

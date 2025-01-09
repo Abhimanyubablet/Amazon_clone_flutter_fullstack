@@ -30,8 +30,7 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
   }
 
   fetchCategoryProducts() async {
-    productList = await homeServices.fetchCategoryProducts(
-        context: context, category: widget.category);
+    productList = await homeServices.fetchCategoryProducts(context: context, category: widget.category);
     setState(() {});
   }
 
@@ -59,8 +58,7 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
           : Column(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   alignment: Alignment.topLeft,
                   child: Text(
                     'Keep shopping for ${widget.category}',
@@ -76,7 +74,7 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                     padding: const EdgeInsets.only(left: 15),
                     itemCount: productList!.length,
                     gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
+                    const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 1,
                       childAspectRatio: 1.4,
                       mainAxisSpacing: 10,

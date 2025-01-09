@@ -63,8 +63,6 @@ class _OrdersState extends State<Orders> {
                   ),
                 ],
               ),
-
-              // display orders
               Container(
                 height: 170,
                 padding: const EdgeInsets.only(

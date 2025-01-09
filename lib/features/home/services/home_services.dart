@@ -16,8 +16,7 @@ class HomeServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
     try {
-      http.Response response =
-      await http.get(Uri.parse("$uri/api/products?category=$category"), headers: {
+      http.Response response = await http.get(Uri.parse("$uri/api/products?category=$category"), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': userProvider.user.token!,
       });
@@ -26,8 +25,7 @@ class HomeServices {
           context: context,
           onSuccess: () {
             for (int i = 0; i <= jsonDecode(response.body).length - 1; i++) {
-              productList.add(
-                  Product.fromJson(jsonEncode(jsonDecode(response.body)[i])));
+              productList.add(Product.fromJson(jsonEncode(jsonDecode(response.body)[i])));
             }
           });
     } catch (e) {
@@ -36,7 +34,6 @@ class HomeServices {
     }
     return productList;
   }
-
 
   Future<Product> fetchDealOfDay({required BuildContext context}) async{
     final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -66,6 +63,5 @@ class HomeServices {
     }
     return product;
   }
-
 
 }

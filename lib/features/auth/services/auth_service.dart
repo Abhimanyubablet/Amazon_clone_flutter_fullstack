@@ -6,7 +6,6 @@ import '../../../common/widgets/bottom_bar.dart';
 import '../../../constants/error_handling.dart';
 import '../../../constants/global_variables.dart';
 import '../../../constants/utils.dart';
-import '../../../models/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -14,18 +13,10 @@ import '../../../providers/user_provider.dart';
 import '../../admin/screens/admin_screen.dart';
 
 class AuthService {
-  // Sign up method to register a user
+
   void signUpUser({required String email, required String password, required String name, required BuildContext context,}) async {
     try {
-      // User user = User(
-      //   id: '',
-      //   name: name,
-      //   password: password,
-      //   address: '',
-      //   type: '',
-      //   token: '',
-      //   email: email,
-      // );
+
       Map<String, String> requestBody = {
         'name': name,
         'email': email,
@@ -91,7 +82,6 @@ class AuthService {
     }
   }
 
-
   // get user data security
   void getUserData(BuildContext context) async {
     try {
@@ -131,4 +121,5 @@ class AuthService {
       // showSnackBar(context, e.toString());
     }
   }
+
 }

@@ -74,8 +74,8 @@ class _PostsScreenState extends State<PostsScreen> {
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                             )
-                        ),
-                      IconButton(
+                           ),
+                        IconButton(
                         onPressed: ()=> deleteProduct(productData,index),
                         icon: const Icon(
                           Icons.delete_outline,
